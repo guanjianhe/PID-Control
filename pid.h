@@ -11,9 +11,9 @@ enum PID_MODE
 
 struct tagPIDInPara
 {
-	int16_t OutputUpperLimit;	//输出上限
-	int16_t OutputLowerLimit;	//输出下限
-    float TargetPoint;			
+    int16_t OutputUpperLimit;   //输出上限
+    int16_t OutputLowerLimit;   //输出下限
+    float TargetPoint;
     float Kp;
     float Ki;
     float Kd;
@@ -21,50 +21,51 @@ struct tagPIDInPara
 
 struct tagPIDInFunc
 {
-	float (*PID_Calc)(struct tagPIDCB *cb,float samplepoint);
-}
+    float (*PID_Calc) (struct tagPIDCB *cb, float samplepoint);
+};
 
 struct tagPIDOutput
 {
-	float Out;
-}
+    float Out;
+};
 
 struct tagPIDPrv
 {
-	float NowError;
-	float LastError;
-	float PrevError;
-	float IntegralSum;
+    float NowError;
+    float LastError;
+    float PrevError;
+    float IntegralSum;
+};
 
 
 struct tagPIDCB
 {
-	struct tagPIDInPara InPara;
-	struct tagPIDOutput Output;
-	struct tagPIDPrv    Prv;
-	struct tagPIDInFunc InFunc;
-}
+    struct tagPIDInPara InPara;
+    struct tagPIDOutput Output;
+    struct tagPIDPrv    Prv;
+    struct tagPIDInFunc InFunc;
+};
 
 
-extern void PID_InitPara(struct tagPIDCB *cb,
-						  enum PID_MODE mode,		//pid模式
-						  float targetpoint,		//目标点
-						  int16_t outputupperlimit,	//输出上限
-						  int16_t outputlowerlimit,	//输出下限
-						  float kp,
-						  float ki,
-						  float kd);
+extern void PID_InitPara (struct tagPIDCB *cb,
+                          enum PID_MODE mode,       //pid模式
+                          float targetpoint,        //目标点
+                          int16_t outputupperlimit, //输出上限
+                          int16_t outputlowerlimit, //输出下限
+                          float kp,
+                          float ki,
+                          float kd);
 
-extern void PID_SetPIDPara(struct tagPIDCB *cb,
-							float kp,
-							float ki,
-							float kd);
-extern void PID_GetPIDPara(struct tagPIDCB *cb,float *pidpara);
+extern void PID_SetPIDPara (struct tagPIDCB *cb,
+                            float kp,
+                            float ki,
+                            float kd);
+extern void PID_GetPIDPara (struct tagPIDCB *cb, float *pidpara);
 
-extern float PID_GetOutput(struct tagPIDCB *cb);
-extern float PID_Calc(struct tagPIDCB *cb,float samplepoint);
+extern float PID_GetOutput (struct tagPIDCB *cb);
+extern float PID_Calc (struct tagPIDCB *cb, float samplepoint);
 
-extern float PID_GetTargetValue(struct tagPIDCB *cb);
-extern void PID_SetTargetValue(struct tagPIDCB *cb,float targetpoint);
+extern float PID_GetTargetValue (struct tagPIDCB *cb);
+extern void PID_SetTargetValue (struct tagPIDCB *cb, float targetpoint);
 
 #endif
